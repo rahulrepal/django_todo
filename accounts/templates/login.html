@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block custom_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'account/css/main.css' %}" />
+{% endblock custom_css %}
+
+
+{% block content %}
+
+    {% for message in messages %}
+    {% if message.tags == "success" %}
+        <div class="alert alert-success fade show">
+            <strong>Error!</strong> {{ message }}
+        </div>
+    {% endif %}
+    {% endfor %}
+<form method="POST" action="" class="container p-4">
+    {% csrf_token %}
+
+
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" >
+    </div>
+
+    {% for message in messages %}
+    {% if message.tags == "error" %}
+        <div class="alert alert-danger fade show">
+            <strong>Error!</strong> {{ message }}
+        </div>
+    {% endif %}
+    {% endfor %}
+    <input type="submit" value="Log In" class="btn btn-primary" />
+    <p class="text-secondary mt-3">Don't have an account,<a class=" text-primary" href="{% url 'register'%}"> Sign Up</a></p>
+</form>
+{% endblock %}

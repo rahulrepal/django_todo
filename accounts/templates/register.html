@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block custom_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'account/css/main.css' %}" />
+{% endblock custom_css %}
+
+
+{% block content %}
+<form method="POST" action="" class="container p-4">
+        {% csrf_token %}
+        <div class="row g-3">
+            <div class="col-sm-6 mb-3">
+                <label for="fname" class="form-label">{{form.first_name.label}}</label>
+                {{form.first_name}}
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label for="lname" class="form-label">{{form.last_name.label}}</label>
+                {{form.last_name}}
+            </div>
+        </div>
+
+
+    <div class="mb-3">
+      <label for="email" class="form-label">{{form.email.label}}</label>
+      {{form.email}}
+    </div>
+    <div class="mb-3">
+      <label for="password1" class="form-label">{{form.password1.label}}</label>
+      {{form.password1}}
+    </div>
+    <div class="mb-3">
+      <label for="password2" class="form-label">{{form.password2.label}}</label>
+      {{form.password2}}
+    </div>
+    {% for error_field, error_message in form.errors.items %}
+        <div class="alert alert-danger fade show">
+             {{ error_message|striptags }}
+        </div>
+    {% endfor %}
+    <input type="submit" value="Sign Up" class="btn btn-primary" />
+    <p class="text-secondary mt-3">Already have an account,<a class=" text-primary" href="{% url 'loginUser'%}"> Log In</a></p>
+
+
+</form>
+{% endblock %}
