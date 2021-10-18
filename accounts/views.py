@@ -48,3 +48,9 @@ def register(request):
         "title":"Register - just todo it",
         "form":form
     })
+
+def logoutUser(request):
+    if not request.user.is_authenticated:
+        return redirect('/account/login')
+    logout(request)
+    return redirect('/')
