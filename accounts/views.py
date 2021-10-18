@@ -14,7 +14,7 @@ def loginUser(request):
         user = authenticate(request,username=email,password=password)
         if user:
             login(request,user)
-            return redirect("/")
+            return redirect("/todos/")
         else:
             messages.error(request,"Wrong email or password, please try again ")
 
