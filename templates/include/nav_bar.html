@@ -8,12 +8,10 @@
       </button>
       <div class="collapse navbar-collapse " id="navbarNav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
 
-              {% comment %} {% if user.is_authenticated %}
+              {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        <a class="nav-link" href="{% url 'logoutUser' %}">Log Out</a>
                     </li>
 
               {% else %}
@@ -27,12 +25,12 @@
                   </li>
                   <li class="nav-item">
                       {% if request.path == "/account/login/" %}
-                        <a class="nav-link active" href="{% url 'login' %}">Log In <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" href="{% url 'loginUser' %}">Log In <span class="sr-only">(current)</span></a>
                       {% else %}
-                        <a class="nav-link" href="{% url 'login' %}">Log In  <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'loginUser' %}">Log In  <span class="sr-only">(current)</span></a>
                       {% endif %}
                   </li>
-              {% endif %} {% endcomment %}
+              {% endif %}
 
         </ul>
       </div>
