@@ -19,5 +19,6 @@ from todo.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name="home"),
-    path('account/',include('accounts.urls'),name="accounts")
+    path('account/',include('accounts.urls'),name="accounts"),
+    path('todos/',include('todos.urls'),name="todos"),
 ]

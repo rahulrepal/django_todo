@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block custom_js %}
+    <script src="{% static '/todos/js/main.js'%}" />
+{% endblock %}
+{% block custom_css %}
+ <link rel="stylesheet" href="{% static '/todos/css/main.css'%}" />
+
+{% endblock %}
+{% block content %}
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <img src="{% static '/todos/img/deleted.gif' %}" class="" alt="funny GIF" width="100%">
+
+      </div>
+    </div>
+
+
+    <div class="container p-4">
+         <h3> Hello, {{first_name}}  &#128521; </h3>
+        {% if not todos %}
+        <div id="notodos" class="p-4">
+
+            <img src="{% static '/todos/img/notodos.gif' %}" class="" alt="funny GIF" width="50%">
+            <p class="text-secondary p-2">Empty todo list, <a class=" facio-primary mt-4" href="{% url 'add_todo' %}">Add Todo</a> </p>
+        </div>
+        {% else %}
+        <div id="todos" class="todos list-group mt-4">
+                {% for message in messages %}
+                {% if message.tags == "success" %}
+                    <script>
+                        $('#exampleModalCenter').modal('show')
+                    </script>
+                {% endif %}
+                {% endfor %}
+            {% for todo in todos %}
+                <a id="todo_{{todo.id}}" href="#" class="list-group-item list-group-item-action flex-column align-items-start" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">{{todo.title}}</h5>
+
+                        <button class="btn btn-link text-danger" onclick="window.location.href='{% url 'delete_todo' id=todo.id%}';">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="todo_body">
+                        <p class="mb-1">{{todo.desc}}</p>
+
+                    </div>
+
+
+                </a>
+            {% endfor %}
+        <div>
+            <a class="btn facio-primary mt-4" href="{% url 'add_todo' %}">Add Todo</a>
+        </div>
+        {% endif %}
+        </div></div>
+{% endblock %}
+
+
+
