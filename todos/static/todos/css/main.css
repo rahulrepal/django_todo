@@ -1,0 +1,10 @@
+#notodos{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.todo_body{
+display:block
+}
